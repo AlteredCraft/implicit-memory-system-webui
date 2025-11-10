@@ -1,0 +1,23 @@
+User Preferences
+=================
+
+Favorite color: blue
+
+PROFESSIONAL:
+- Writer: Non-fiction, tech writing
+- Published book: "Clean Architecture with Python"
+- Substack: "Altered Craft" (publishes 2x/week)
+
+Activities & Interests
+======================
+- Writing
+- Has a house with a den
+
+Current Projects
+================
+- Writing an article for blog (started 2025-11-10)
+- Solo Entrepreneur Management Web App (started 2025-11-07)
+
+Recent Activities
+=================
+- Beach writing trip (returned Saturday 2025-11-09)

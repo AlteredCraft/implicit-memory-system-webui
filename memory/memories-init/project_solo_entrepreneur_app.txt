@@ -1,0 +1,46 @@
+Solo Entrepreneur Management Web App
+=====================================
+Started: 2025-11-07
+
+Project Description
+-------------------
+A web app designed to assist solo entrepreneurs with managing their responsibilities.
+
+MVP Features
+------------
+1. Time Tracking
+   - Track time spent on tasks/projects
+   - Associate time entries with clients
+   - Start/stop timer functionality
+   - Manual time entry option
+
+2. Client Rolodex
+   - Store and manage client contact information
+   - Client profiles (name, email, phone, company, etc.)
+   - Link clients to time tracking entries
+   - Search/filter clients
+
+3. Company Metadata Dashboard
+   - Record and display key company information
+   - Business metrics overview
+   - Summary of time tracked, clients, projects
+
+To-Do List
+----------
+[ ] Define database schema for MVP features
+[ ] Design UI mockups for time tracking interface
+[ ] Design UI mockups for client rolodex
+[ ] Design UI mockups for dashboard
+[ ] Choose tech stack
+[ ] Set up development environment
+[ ] Build authentication system
+[ ] Implement time tracking functionality
+[ ] Implement client rolodex
+[ ] Build company metadata dashboard
+[ ] Testing
+[ ] Deployment
+
+Notes
+-----
+- Target users: Solo entrepreneurs
+- Focus: Time tracking, client management, business overview

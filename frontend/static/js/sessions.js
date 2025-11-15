@@ -277,7 +277,7 @@ async function generateDiagram(sessionId) {
             <div class="spinner-border text-primary mb-3" role="status">
                 <span class="visually-hidden">Loading diagram...</span>
             </div>
-            <p>Loading Mermaid sequence diagram...</p>
+            <p>Generating Mermaid sequence diagram...</p>
         </div>
     `;
     modal.show();
@@ -293,7 +293,7 @@ async function generateDiagram(sessionId) {
 
         const data = await response.json();
 
-        // Store diagram for clipboard copy
+        // Store diagram for clipboard copy and live editor
         window.currentDiagram = data.diagram;
 
         // Extract mermaid code from markdown code fence
@@ -303,50 +303,28 @@ async function generateDiagram(sessionId) {
             mermaidCode = mermaidMatch[1].trim();
         }
 
-        // Display diagram with Mermaid rendering
-        const diagramId = `mermaid-${Date.now()}`;
+        // Simplified UI - just source and buttons
         document.getElementById('diagramContent').innerHTML = `
-            <div class="mb-3">
-                <button class="btn btn-sm btn-outline-primary me-2" onclick="copyDiagramToClipboard()">
+            <div class="alert alert-info mb-3">
+                <i class="bi bi-info-circle"></i>
+                <strong>Mermaid Sequence Diagram Generated</strong><br>
+                <small>Click "View in Live Editor" to see the rendered diagram with full interactive features.</small>
+            </div>
+
+            <div class="d-grid gap-2 mb-3">
+                <button class="btn btn-success" onclick="openInMermaidLiveEditor()">
+                    <i class="bi bi-diagram-3"></i> View in Live Editor
+                </button>
+                <button class="btn btn-outline-primary" onclick="copyDiagramToClipboard()">
                     <i class="bi bi-clipboard"></i> Copy Mermaid Code
                 </button>
-                <button class="btn btn-sm btn-outline-secondary" onclick="toggleDiagramSource()">
-                    <i class="bi bi-code"></i> <span id="toggleSourceText">Show Source</span>
-                </button>
             </div>
-            <div id="renderedDiagram" class="border rounded p-3 bg-light" style="overflow-x: auto; min-width: 100%;">
-                <div class="mermaid" id="${diagramId}" style="width: 100%; min-height: 400px;">${escapeHtml(mermaidCode)}</div>
+
+            <div class="mb-2">
+                <strong>Mermaid Source Code:</strong>
             </div>
-            <pre id="diagramSource" class="border rounded p-3 bg-light mt-3" style="max-height: 400px; overflow-y: auto; display: none;">${escapeHtml(data.diagram)}</pre>
+            <pre class="border rounded p-3 bg-light" style="max-height: 400px; overflow-y: auto;">${escapeHtml(data.diagram)}</pre>
         `;
-
-        // Initialize Mermaid and render the diagram
-        if (typeof mermaid !== 'undefined') {
-            mermaid.initialize({
-                startOnLoad: false,
-                theme: 'default',
-                sequence: {
-                    actorMargin: 80,
-                    boxMargin: 15,
-                    boxTextMargin: 10,
-                    noteMargin: 15,
-                    messageMargin: 50,
-                    mirrorActors: false,
-                    width: 250,
-                    height: 80,
-                    wrap: true,
-                    wrapPadding: 10,
-                    labelBoxWidth: 100,
-                    labelBoxHeight: 50,
-                    messageAlign: 'center'
-                },
-                maxTextSize: 90000
-            });
-
-            await mermaid.run({
-                nodes: [document.querySelector(`#${diagramId}`)]
-            });
-        }
 
     } catch (error) {
         console.error('Failed to generate diagram:', error);
@@ -359,18 +337,53 @@ async function generateDiagram(sessionId) {
 }
 
 /**
- * Toggle diagram source code view
+ * Generate Mermaid Live Editor URL
  */
-function toggleDiagramSource() {
-    const source = document.getElementById('diagramSource');
-    const toggleText = document.getElementById('toggleSourceText');
+function generateMermaidLiveEditorUrl(mermaidCode) {
+    // Create the state object for Mermaid Live Editor
+    const state = {
+        code: mermaidCode,
+        mermaid: {
+            theme: 'default'
+        },
+        updateEditor: false,
+        autoSync: true,
+        updateDiagram: true
+    };
 
-    if (source.style.display === 'none') {
-        source.style.display = 'block';
-        toggleText.textContent = 'Hide Source';
-    } else {
-        source.style.display = 'none';
-        toggleText.textContent = 'Show Source';
+    // Convert to JSON and encode
+    const jsonString = JSON.stringify(state);
+
+    // For simple diagrams, use base64 encoding
+    try {
+        const base64 = btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g,
+            function toSolidBytes(match, p1) {
+                return String.fromCharCode('0x' + p1);
+            }));
+        return `https://mermaid.live/edit#base64:${base64}`;
+    } catch (e) {
+        // If base64 fails (too long), fall back to pako compression
+        // Note: This requires adding pako library to the page
+        console.warn('Base64 encoding failed, diagram may be too large for URL');
+        // For now, just return the mermaid.live base URL
+        return 'https://mermaid.live/edit';
+    }
+}
+
+/**
+ * Open diagram in Mermaid Live Editor
+ */
+function openInMermaidLiveEditor() {
+    if (window.currentDiagram) {
+        // Extract mermaid code from markdown code fence if present
+        let mermaidCode = window.currentDiagram;
+        const mermaidMatch = window.currentDiagram.match(/```mermaid\n([\s\S]*?)\n```/);
+        if (mermaidMatch) {
+            mermaidCode = mermaidMatch[1].trim();
+        }
+
+        const url = generateMermaidLiveEditorUrl(mermaidCode);
+        window.open(url, '_blank');
     }
 }
 

@@ -10,6 +10,8 @@ A demonstration of Claude's autonomous memory management using Anthropic's Memor
 
 ## Quick Start
 
+### Option 1: Web UI (Recommended) 🌐
+
 ```bash
 # 1. Install dependencies
 uv sync
@@ -18,7 +20,23 @@ uv sync
 cp .env.example .env
 # Add your Anthropic API key to .env
 
-# 3. Run
+# 3. Run the Web UI
+./run_webui.sh
+# Then open http://localhost:8000 in your browser
+```
+
+**Features:**
+- ✨ Real-time streaming chat interface
+- 📁 Visual memory file browser
+- 📊 Sessions dashboard with diagram generation
+- 🎨 Modern Bootstrap UI
+
+See [README_WEBUI.md](README_WEBUI.md) for detailed Web UI documentation.
+
+### Option 2: CLI 💻
+
+```bash
+# Same setup, then run CLI
 uv run src/chat.py
 ```
 

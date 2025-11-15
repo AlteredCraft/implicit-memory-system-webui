@@ -1,0 +1,215 @@
+/* Custom styles for Memory System v2 Web UI */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-fluid {
+    flex: 1;
+    padding: 0;
+}
+
+.row.h-100 {
+    margin: 0;
+}
+
+/* Chat Panel */
+.chat-panel {
+    padding: 0;
+    height: calc(100vh - 56px);
+}
+
+.memory-panel {
+    padding: 0;
+    height: calc(100vh - 56px);
+}
+
+/* Chat Messages */
+#chatMessages {
+    background-color: #f8f9fa;
+    min-height: 400px;
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    max-width: 85%;
+}
+
+.message.user {
+    background-color: #007bff;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.message.assistant {
+    background-color: white;
+    border: 1px solid #dee2e6;
+}
+
+.message.system {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    font-size: 0.875rem;
+    font-style: italic;
+    max-width: 100%;
+}
+
+.message-header {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.message-content {
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.tool-use {
+    background-color: #e7f3ff;
+    border-left: 3px solid #0d6efd;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: inline-block;
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    margin: 0 2px;
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        opacity: 0.3;
+    }
+    30% {
+        opacity: 1;
+    }
+}
+
+/* Memory List */
+.memory-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.memory-item:hover {
+    background-color: #f8f9fa;
+}
+
+.memory-item.active {
+    background-color: #e7f3ff;
+    border-left: 3px solid #0d6efd;
+}
+
+/* Session List */
+.session-item {
+    cursor: pointer;
+}
+
+.session-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Code blocks */
+pre code {
+    font-size: 0.875rem;
+}
+
+/* Connection Status */
+#connectionStatus .bi-circle-fill {
+    font-size: 0.5rem;
+}
+
+#connectionStatus.connected {
+    background-color: #198754 !important;
+}
+
+#connectionStatus.error {
+    background-color: #dc3545 !important;
+}
+
+/* Tab Content */
+.tab-content {
+    overflow: hidden;
+}
+
+.tab-pane {
+    height: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .memory-panel {
+        border-top: 1px solid #dee2e6;
+        border-left: none !important;
+        height: auto;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Loading spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+/* Mermaid diagram styling */
+.mermaid {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}

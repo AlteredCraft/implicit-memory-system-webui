@@ -16,28 +16,29 @@
 </head>
 <body>
     <!-- Top Navigation Bar -->
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">
-                <i class="bi bi-brain"></i> Memory System v2
+    <nav class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid py-2">
+            <span class="navbar-brand mb-0 h1 d-flex align-items-center">
+                <i class="bi bi-brain fs-4 me-2"></i>
+                <span>Memory System v2</span>
             </span>
-            <div class="d-flex align-items-center">
-                <span id="connectionStatus" class="badge bg-secondary me-3">
-                    <i class="bi bi-circle-fill"></i> Not Initialized
+            <div class="d-flex align-items-center gap-2">
+                <span id="connectionStatus" class="badge bg-secondary">
+                    <i class="bi bi-circle-fill me-1"></i>Not Initialized
                 </span>
-                <button class="btn btn-outline-light btn-sm me-2" data-bs-toggle="modal" data-bs-target="#settingsModal">
-                    <i class="bi bi-gear"></i> Settings
+                <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="bi bi-gear me-1"></i>Settings
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <div class="container-fluid h-100">
-        <div class="row h-100">
+    <div class="container-fluid">
+        <div class="row">
             <!-- Left Panel: Chat -->
-            <div class="col-md-8 d-flex flex-column chat-panel">
-                <ul class="nav nav-tabs mt-3" id="mainTabs" role="tablist">
+            <div class="col-md-8 chat-panel">
+                <ul class="nav nav-tabs" id="mainTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="chat-tab" data-bs-toggle="tab" data-bs-target="#chat" type="button" role="tab">
                             <i class="bi bi-chat-dots"></i> Chat
@@ -50,10 +51,10 @@
                     </li>
                 </ul>
 
-                <div class="tab-content flex-grow-1 d-flex flex-column">
+                <div class="tab-content">
                     <!-- Chat Tab -->
-                    <div class="tab-pane fade show active flex-grow-1 d-flex flex-column" id="chat" role="tabpanel">
-                        <div id="chatMessages" class="flex-grow-1 overflow-auto p-3 bg-light"></div>
+                    <div class="tab-pane fade show active" id="chat" role="tabpanel">
+                        <div id="chatMessages" class="p-3 bg-light"></div>
 
                         <div class="p-3 bg-white border-top">
                             <div class="input-group">
@@ -69,22 +70,22 @@
                     </div>
 
                     <!-- Sessions Tab -->
-                    <div class="tab-pane fade flex-grow-1 d-flex flex-column" id="sessions" role="tabpanel">
-                        <div class="p-3 d-flex flex-column h-100">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="tab-pane fade" id="sessions" role="tabpanel">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center">
                                 <h5><i class="bi bi-journal-text"></i> Session History</h5>
                                 <button class="btn btn-sm btn-outline-primary" id="refreshSessions">
                                     <i class="bi bi-arrow-clockwise"></i> Refresh
                                 </button>
                             </div>
-                            <div id="sessionsList" class="list-group flex-grow-1" style="max-height: calc(100vh - 250px); overflow-y: auto;"></div>
+                            <div id="sessionsList" class="list-group"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Right Panel: Memory Browser -->
-            <div class="col-md-4 border-start d-flex flex-column memory-panel">
+            <div class="col-md-4 border-start memory-panel">
                 <div class="p-3 border-bottom bg-light">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="mb-0"><i class="bi bi-folder2-open"></i> Memory Files</h5>
@@ -197,6 +198,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 shadow-lg">
+        <div class="container-fluid">
+            <div class="row align-items-center gx-3">
+                <div class="col-md-9 text-center text-md-start mb-2 mb-md-0">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 flex-wrap">
+                        <div class="d-flex align-items-center">
+                            <img src="/static/img/AC-logo.svg" alt="AlteredCraft Logo" style="height: 36px; background-color: white; padding: 3px; border-radius: 3px;" class="me-2">
+                            <span class="fw-semibold fs-6">AlteredCraft</span>
+                        </div>
+                        <span class="text-white-50 d-none d-md-inline">|</span>
+                        <small class="text-white-50">
+                            Companion app for
+                            <a href="https://alteredcraft.com/" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none border-bottom border-white">
+                                AlteredCraft Substack
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center text-md-end">
+                    <a href="https://alteredcraft.com/" target="_blank" rel="noopener noreferrer" class="btn btn-light btn-sm">
+                        <i class="bi bi-envelope-heart me-1"></i>Subscribe
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

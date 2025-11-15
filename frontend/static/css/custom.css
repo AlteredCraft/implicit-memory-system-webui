@@ -1,5 +1,6 @@
 /* Custom styles for Memory System v2 Web UI */
 
+/* Simple Box Model: Header + Main + Footer */
 html, body {
     height: 100%;
     margin: 0;
@@ -9,32 +10,77 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
 }
 
+/* Header - fixed size */
+nav.navbar {
+    flex-shrink: 0;
+}
+
+/* Main content - fills remaining space */
 .container-fluid {
-    flex: 1;
+    flex: 1 1 0% !important;
     padding: 0;
+    overflow: hidden;
+    display: flex !important;
+    flex-direction: column;
+    min-height: 0;
 }
 
-.row.h-100 {
+.row {
     margin: 0;
+    flex: 1 1 0% !important;
+    overflow: hidden;
+    display: flex !important;
+    min-height: 0;
 }
 
-/* Chat Panel */
+/* Chat Panel - left side */
 .chat-panel {
     padding: 0;
-    height: calc(100vh - 56px);
+    display: flex !important;
+    flex-direction: column;
+    flex: 1 1 0%;
+    overflow: hidden;
+    min-height: 0;
+    max-height: 100%;
 }
 
+/* Memory Panel - right side */
 .memory-panel {
     padding: 0;
-    height: calc(100vh - 56px);
+    display: flex !important;
+    flex-direction: column;
+    flex: 0 0 auto;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.memory-panel > div:first-child {
+    flex-shrink: 0;
+}
+
+#memoryList {
+    flex: 1;
+    overflow-y: auto;
+}
+
+#memoryViewer {
+    flex-shrink: 0;
+}
+
+/* Footer - fixed size */
+footer {
+    flex-shrink: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Chat Messages */
 #chatMessages {
     background-color: #f8f9fa;
-    min-height: 400px;
+    min-height: 100px;
 }
 
 .message {
@@ -164,13 +210,92 @@ pre code {
     background-color: #dc3545 !important;
 }
 
-/* Tab Content */
+/* Tabs - fixed height */
+.nav-tabs {
+    flex-shrink: 0;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+}
+
+/* Tab Content - fills remaining space */
 .tab-content {
-    overflow: hidden;
+    flex: 1 1 0% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
 }
 
 .tab-pane {
-    height: 100%;
+    /* Don't override display - let Bootstrap handle show/hide */
+    flex: 1 1 0%;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    max-height: 100%;
+}
+
+.tab-pane.active.show {
+    /* Only apply flex layout to visible tabs */
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Chat tab */
+#chat {
+    overflow: hidden;
+}
+
+#chatMessages {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Sessions tab */
+#sessions {
+    padding: 1rem;
+    overflow: hidden;
+    max-height: 100%;
+}
+
+#sessions > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    max-height: 100%;
+}
+
+#sessions .d-flex.justify-content-between {
+    flex-shrink: 0;
+    margin-bottom: 1rem;
+}
+
+#sessionsList {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    max-height: 100%;
+}
+
+#sessionsList::-webkit-scrollbar {
+    width: 8px;
+}
+
+#sessionsList::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#sessionsList::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#sessionsList::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 /* Responsive adjustments */

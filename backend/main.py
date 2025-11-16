@@ -280,7 +280,7 @@ async def list_sessions():
             ]
             if token_events:
                 last_event = token_events[-1]
-                cumulative = last_event.get("details", {}).get("cumulative", {})
+                cumulative = last_event.get("cumulative", {})
                 total_tokens = (
                     cumulative.get("total_input_tokens", 0) +
                     cumulative.get("total_output_tokens", 0)

@@ -51,11 +51,11 @@ def generate_mermaid_diagram(trace_data: Dict[str, Any]) -> str:
         Mermaid diagram as a string
     """
     lines = [
-        "# Session Sequence Diagram",
-        "",
-        f"**Session ID:** {trace_data.get('session_id', 'unknown')}  ",
-        f"**Start Time:** {trace_data.get('start_time', 'unknown')}  ",
-        f"**Model:** {trace_data.get('model', 'unknown')}  ",
+        "---",
+        f"Session ID: {trace_data.get('session_id', 'unknown')}",
+        f"Start Time: {trace_data.get('start_time', 'unknown')}",
+        f"Model: {trace_data.get('model', 'unknown')}",
+        "---",
         "",
         "```mermaid",
         "sequenceDiagram",

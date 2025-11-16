@@ -293,7 +293,7 @@ async function generateDiagram(sessionId) {
 
         const data = await response.json();
 
-        // Store diagram for clipboard copy and live editor
+        // Store diagram for live editor
         window.currentDiagram = data.diagram;
 
         // Extract mermaid code from markdown code fence
@@ -305,18 +305,14 @@ async function generateDiagram(sessionId) {
 
         // Simplified UI - just source and buttons
         document.getElementById('diagramContent').innerHTML = `
-            <div class="alert alert-info mb-3">
-                <i class="bi bi-info-circle"></i>
-                <strong>Mermaid Sequence Diagram Generated</strong><br>
-                <small>Click "View in Live Editor" to see the rendered diagram with full interactive features.</small>
-            </div>
-
-            <div class="d-grid gap-2 mb-3">
-                <button class="btn btn-success" onclick="openInMermaidLiveEditor()">
+            <div class="alert alert-info mb-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="bi bi-info-circle"></i>
+                    <strong>Mermaid Sequence Diagram Generated</strong><br>
+                    <small>Click "View in Live Editor" to see the rendered diagram with full interactive features.</small>
+                </div>
+                <button class="btn btn-success btn-sm" onclick="openInMermaidLiveEditor()">
                     <i class="bi bi-diagram-3"></i> View in Live Editor
-                </button>
-                <button class="btn btn-outline-primary" onclick="copyDiagramToClipboard()">
-                    <i class="bi bi-clipboard"></i> Copy Mermaid Code
                 </button>
             </div>
 
@@ -387,27 +383,3 @@ function openInMermaidLiveEditor() {
     }
 }
 
-/**
- * Copy diagram to clipboard
- */
-function copyDiagramToClipboard() {
-    if (window.currentDiagram) {
-        navigator.clipboard.writeText(window.currentDiagram).then(() => {
-            // Show success feedback
-            const btn = event.target.closest('button');
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
-            btn.classList.add('btn-success');
-            btn.classList.remove('btn-outline-primary');
-
-            setTimeout(() => {
-                btn.innerHTML = originalHtml;
-                btn.classList.remove('btn-success');
-                btn.classList.add('btn-outline-primary');
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy:', err);
-            alert('Failed to copy to clipboard');
-        });
-    }
-}
